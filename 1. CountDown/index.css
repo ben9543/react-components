@@ -1,0 +1,96 @@
+.countdown__container{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 100;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    /* Center Div */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.countdown__numbers-wrapper{
+    font-size: 4rem;
+    height: 100%;
+    width: 50rem;
+
+    /* Center Div */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Media Query */
+
+}
+.countdown__numbers{
+    position: relative;
+    height: 100%;
+    width: 12rem;
+    margin-right: 1.5rem;
+}
+.countdown__numbers::after{
+    font-size: 0.6rem;
+    position: absolute;
+    bottom: 10%;
+    right: 15%;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.16rem;
+}
+.countdown__number{
+    border: 1px solid black;
+    position: absolute;
+    padding: 0.1rem;
+    width: 3rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-stretch: extra-expanded;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+.countdown__number:first-child{
+    left: 17.5%;
+    bottom: 50%;
+    transform: translateY(50%);
+}
+.countdown__number:last-child{
+    right: 17.5%;
+    bottom: 50%;
+    transform: translateY(50%);
+}
+
+#countdown-days::after{
+    content: 'Days';
+}
+#countdown-hours::after{
+    content: 'Hours';
+}
+#countdown-minutes::after{
+    content: 'Minutes';
+}
+#countdown-seconds::after{
+    content: 'Seconds';
+}
+
+@media screen and (max-width: 780px) {
+    .countdown__numbers-wrapper{
+        font-size: 2rem;
+        width: 25rem;
+    }
+    .countdown__numbers{
+        margin: 0;
+    }
+    .countdown__number{
+        width: 1.5rem;
+    }
+    .countdown__numbers::after{
+        font-size: 0.4rem;
+        bottom: 18%;
+    }
+}
