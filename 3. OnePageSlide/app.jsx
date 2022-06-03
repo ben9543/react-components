@@ -1,8 +1,11 @@
 import { useState } from "react";
 
 const getPercentage = (steps) => steps*100;
+const defaultButton = ({onClick, title}) => {
+    return <button className="text-white p-3 border border-white w-40 rounded hover:bg-white hover:text-gray-900 transition-all" onClick={onClick}>{title}</button>
+}
 
-const OnePageSlide = ({ pages }) => {
+const OnePageSlide = ({ pages, prevBtn, nextBtn }) => {
     const pagination = pages.length-1;
     const [percentage, setPercentage] = useState(1);
     const handlePrevPage = () => {
@@ -39,11 +42,15 @@ const OnePageSlide = ({ pages }) => {
                 {/* Pages end */}
                 </div>
             </div>
-            <div className="absolute h-20 w-20 flex justify-center items-center bottom-16 left-96">
-                <button onClick={handlePrevPage} className="text-white">Prev page</button>
+            <div className="absolute flex justify-center items-center bottom-16 left-96">
+                {
+                    prevBtn ? prevBtn : defaultButton({onClick: handlePrevPage, title: "Prev Page"})
+                }
             </div>
-            <div className="absolute h-20 w-20 flex justify-center items-center bottom-16 right-96">
-                <button onClick={handleNextPage} className="text-white">Next page</button>
+            <div className="absolute flex justify-center items-center bottom-16 right-96">
+                {
+                    nextBtn ? nextBtn : defaultButton({onClick: handleNextPage, title: "Next Page"})
+                }
             </div>
         </div>
     )
