@@ -4,6 +4,7 @@ import { countdown__container_style, countdown__number_style } from "./styles";
 
 interface CountDownProps {
   dDay: string;
+  countDownEnds: string;
   height?: string;
   bgColor?: string; 
   numberBgColor?: string;
@@ -32,13 +33,19 @@ const setCountDown = (dDay_str:string,
     setMinutes, 
     setSeconds
   }: CountDownSetStateProps) => {
-  const dDay:any = new Date(dDay_str);
-  const nowDay:any = new Date(Date.now());
-  const difference = new Date(dDay-nowDay);
-  setDays(difference.getDay().toLocaleString('en-GB', {minimumIntegerDigits: 2, useGrouping: false}))
-  setHours(difference.getHours().toLocaleString('en-GB',{minimumIntegerDigits: 2, useGrouping: false})); 
-  setMinutes(difference.getMonth().toLocaleString('en-GB',{minimumIntegerDigits: 2, useGrouping: false}));
-  setSeconds(difference.getSeconds().toLocaleString('en-GB',{minimumIntegerDigits: 2, useGrouping: false}));
+  
+    const today:any = new Date();
+    const endDate:any = new Date(dDay_str);
+    const days = Math.floor((endDate - today) / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(Math.abs(endDate - today) / (1000 * 60 * 60) % 24);
+    const minutes = Math.floor(Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60) % 60);
+    const seconds = Math.floor(Math.abs(endDate.getTime() - today.getTime()) / (1000) % 60); 
+
+    console.log(Math.floor(days), Math.floor(hours), Math.floor(minutes), Math.floor(seconds))
+    setDays(days.toLocaleString('en-GB', {minimumIntegerDigits: 2, useGrouping: false}))
+    setHours(hours.toLocaleString('en-GB',{minimumIntegerDigits: 2, useGrouping: false})); 
+    setMinutes(minutes.toLocaleString('en-GB',{minimumIntegerDigits: 2, useGrouping: false}));
+    setSeconds(seconds.toLocaleString('en-GB',{minimumIntegerDigits: 2, useGrouping: false}));
 };
 
 const CountDown: React.FC<CountDownProps> = ({
@@ -62,11 +69,11 @@ const CountDown: React.FC<CountDownProps> = ({
       setCountDown(dDay, {setDays, setHours, setMinutes, setSeconds});
     }, 1000);
   }, []);
-
   return (
     <div className="countdown__container" style={countdown__container_style(bgColor, color, height)}>
       <div className="countdown__numbers-wrapper" >
           {
+            
             mapping_template.map((id,k) => {
               let value = days;
               switch (id) {
