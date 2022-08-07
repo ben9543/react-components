@@ -1,0 +1,23 @@
+.pages__container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    box-sizing: content-box;
+}
+.remove__scrollbar{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: scroll;
+    box-sizing: content-box; /* So the width will be 100% + 17px */
+
+    /* Remove the scroll bar */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.remove__scrollbar::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
